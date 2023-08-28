@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
@@ -17,9 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded;
 
     public Image hearts;
-    public float health;
-    public float previousHealth;
-    public float maxHealth;
+
 
     void Start()
     {
@@ -61,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             //animator.SetTrigger("Jump"); // Kun hypylle animaatio.
         }
 
-        hearts.fillAmount = health/maxHealth;
+        hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,21 +78,26 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
             Heal(1);
         }
+
+        if (collision.CompareTag("LevelEnd"))
+        {
+            SceneManager.LoadScene("Map");
+        }
     }
 
     void Heal(float amount)
     {
-        previousHealth = hearts.fillAmount * maxHealth;
-        health += amount;
-        if(health > maxHealth)
+        GameManager.manager.previousHealth = hearts.fillAmount * GameManager.manager.maxHealth;
+        GameManager.manager.health += amount;
+        if(GameManager.manager.health > GameManager.manager.maxHealth)
         {
-            health = maxHealth;
+            GameManager.manager.health = GameManager.manager.maxHealth;
         }
     }
 
     void TakeDamage(float dmg)
     {
-        health -= dmg;
+        GameManager.manager.health -= dmg;
 
     }
 }
