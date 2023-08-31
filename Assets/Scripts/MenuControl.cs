@@ -10,4 +10,23 @@ public class MenuControl : MonoBehaviour
         //Play painiketta painettu 
         SceneManager.LoadScene("Map");
     }
+
+    public void Save()
+    {
+        //Tämä ajetaan menusta, kun painetaan Save painiketta
+        GameManager.manager.Save();
+    }
+
+    public void Load()
+    {
+        //Main menun load painike
+        GameManager.manager.Load();
+
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("Quit!");
+    }
 }
