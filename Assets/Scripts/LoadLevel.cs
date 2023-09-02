@@ -33,7 +33,6 @@ public class LoadLevel : MonoBehaviour
             GameManager.manager.GetType().GetField(levelToLoad).SetValue(GameManager.manager, true);
             //Laitetaan LevelClear icon/teksti n‰kyviin
             transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            transform.GetChild(2).gameObject.GetComponent<Canvas>().enabled = true;
             //Koska taso on l‰pi, poistetaan level trigger box colliderista ettei tasoon p‰‰se takaisin.
             GetComponent<BoxCollider2D>().enabled = false;
         }

@@ -514,7 +514,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.52, y: 0.42, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1373,9 +1373,6 @@ MonoBehaviour:
     m_Bits: 64
   grounded: 0
   hearts: {fileID: 2094971909}
-  health: 3
-  previousHealth: 0
-  maxHealth: 3
 --- !u!1 &1774877995
 GameObject:
   m_ObjectHideFlags: 0

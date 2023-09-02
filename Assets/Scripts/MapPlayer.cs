@@ -5,7 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MapPlayer : MonoBehaviour
 {
-    public float speed;
+    public float moveSpeed;
+    public float jumpForce;
+    public Animator animator;
+    public Rigidbody2D rb2D;
+
+    public Transform groundCheckPosition;
+    public float groundCheckRadius;
+    public LayerMask groundCheckLayer;
+    public bool grounded;
+
 
     void Start()
     {
@@ -18,14 +27,44 @@ public class MapPlayer : MonoBehaviour
             //Asetetaan pelaajalle uusi sijainti
             transform.position = GameObject.Find(GameManager.manager.currentLevel).transform.GetChild(0).transform.position;
         }
+
+        animator = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        float verticalMove = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        transform.Translate(horizontalMove, verticalMove, 0);
+        //Groundtest eli ollaanko kosketuksissa maahan
+        if (Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+
+        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);
+
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            //Meill‰ on joko a tai d pohjassa
+            //transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1,1 ); // X scalen muutos kun liikkuu, p‰‰lle sitten kun on hahmo valmis.
+
+            //animator.SetBool("Walk", true); //sitten kun animaatio valmis ja bool laitettuna animaattoriin.
+        }
+        else
+        {
+            //ei liikuta
+            //animator.SetBool("Walk", false);  // Jos walk=false niin idle animaatio toistuu.
+        }
+
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            rb2D.velocity = new Vector2(0, jumpForce);
+            //animator.SetTrigger("Jump"); // Kun hypylle animaatio.
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
