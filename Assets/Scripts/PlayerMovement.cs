@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
+
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
+
     public float jumpForce;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
+
     public Animator animator;
     public Rigidbody2D rb2D;
+    private TrailRenderer trailRenderer;
 
     public Transform groundCheckPosition;
     public float groundCheckRadius;
@@ -20,18 +31,25 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
+    
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>(); 
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
 
         //Groundtest eli ollaanko kosketuksissa maahan
-        if(Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
+        if (Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
         {
             grounded = true;
         }
@@ -45,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetAxisRaw("Horizontal")!= 0)
         {
             //Meill‰ on joko a tai d pohjassa
-            //transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1,1 ); // X scalen muutos kun liikkuu, p‰‰lle sitten kun on hahmo valmis.
+            transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1,1 ); // X scalen muutos kun liikkuu, p‰‰lle sitten kun on hahmo valmis.
 
             //animator.SetBool("Walk", true); //sitten kun animaatio valmis ja bool laitettuna animaattoriin.
         }
@@ -53,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //ei liikuta
             //animator.SetBool("Walk", false);  // Jos walk=false niin idle animaatio toistuu.
-        }
+        }    
 
         if (Input.GetButtonDown("Jump")&& grounded)
         {
@@ -69,7 +87,22 @@ public class PlayerMovement : MonoBehaviour
             rb2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
         hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
+
+    }
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+
+        rb2D.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb2D.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -110,4 +143,24 @@ public class PlayerMovement : MonoBehaviour
         GameManager.manager.health -= dmg;
 
     }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb2D.gravityScale;
+        rb2D.gravityScale = 0f;
+        rb2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        trailRenderer.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        trailRenderer.emitting = false;
+        rb2D.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+
+
+
 }
