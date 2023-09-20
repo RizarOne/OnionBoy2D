@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
         hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
 
     }
+
     private void FixedUpdate()
     {
         if (isDashing)
