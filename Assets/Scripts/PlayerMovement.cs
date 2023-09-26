@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
+   
+
     
 
 
@@ -111,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             Debug.Log("Got hit by trap!");
-            TakeDamage(1); // 3 sydäntä joisa 1dmg tiputtaa yhden pois
+            TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
         }
     }
 
