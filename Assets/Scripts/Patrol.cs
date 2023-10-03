@@ -11,6 +11,8 @@ public class Patrol : MonoBehaviour
     private Transform currentPoint;
     public float speed;
 
+    
+
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
+              
         Vector2 point = currentPoint.position - transform.position;
         if (currentPoint == pointB.transform)
         {
@@ -32,16 +35,17 @@ public class Patrol : MonoBehaviour
             rb2D.velocity = new Vector2(-speed, 0);
         }
 
-        if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+        if(Vector2.Distance(transform.position, currentPoint.position) < 2f && currentPoint == pointB.transform)
         {
             flip();
             currentPoint = pointA.transform;
         }
-        if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+        if(Vector2.Distance(transform.position, currentPoint.position) < 2f && currentPoint == pointA.transform)
         {
             flip();
             currentPoint = pointB.transform;
-        }
+        }     
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -55,7 +59,7 @@ public class Patrol : MonoBehaviour
     private void flip()
     {
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
+        localScale.x *= 1;// VIhollisen peilaus jos ei toimi oikein niin -1
         transform.localScale = localScale;
     }
 
