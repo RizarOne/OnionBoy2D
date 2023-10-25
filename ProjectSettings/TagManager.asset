@@ -9,6 +9,8 @@ TagManager:
   - HealthPotion
   - LevelTrigger
   - LevelEnd
+  - EnemyDamager
+  - Potato
   layers:
   - Default
   - TransparentFX

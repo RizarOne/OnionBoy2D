@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 29233202}
   m_Layer: 7
   m_Name: hitBox
-  m_TagString: Untagged
+  m_TagString: EnemyDamager
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 1508925451}
   m_Layer: 7
   m_Name: PotatoEnemyPH
-  m_TagString: Untagged
+  m_TagString: Potato
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1353,6 +1353,7 @@ GameObject:
   - component: {fileID: 1988451681}
   - component: {fileID: 1988451678}
   - component: {fileID: 1988451684}
+  - component: {fileID: 1988451685}
   m_Layer: 7
   m_Name: CarrotDudePH
   m_TagString: Untagged
@@ -1449,6 +1450,21 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 85800083}
   triggerArea: {fileID: 1641079393}
+--- !u!114 &1988451685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988451676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7adaae364396964a8eeb4b56067ecc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1988451678}
+  maxHealth: 3
+  currentHealth: 0
 --- !u!1 &2081337048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1740,10 @@ PrefabInstance:
     - target: {fileID: 4132405663885192296, guid: 2fe39433195a16c45a2533b7663ee5aa, type: 3}
       propertyPath: jumpForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132405663885192296, guid: 2fe39433195a16c45a2533b7663ee5aa, type: 3}
+      propertyPath: knockbackForce
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7848208684018815108, guid: 2fe39433195a16c45a2533b7663ee5aa, type: 3}
       propertyPath: m_Name

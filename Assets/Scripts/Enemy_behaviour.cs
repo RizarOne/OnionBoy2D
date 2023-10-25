@@ -53,7 +53,6 @@ public class Enemy_behaviour : MonoBehaviour
     }
 
 
-
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
@@ -139,4 +138,7 @@ public class Enemy_behaviour : MonoBehaviour
 
         transform.eulerAngles = rotation;
     }
+
+
+
 }

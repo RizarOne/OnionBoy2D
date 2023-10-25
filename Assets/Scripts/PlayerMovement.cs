@@ -31,10 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
-   
-
-    
-
 
     void Start()
     {
@@ -59,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded=false;
         }
-
-        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);
+              
+        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);       
 
         if(Input.GetAxisRaw("Horizontal")!= 0)
         {
@@ -108,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         rb2D.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb2D.velocity.y);
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
@@ -115,10 +112,28 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Got hit by trap!");
             TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
         }
+              
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+      
+
+
+        if (collision.CompareTag("EnemyDamager"))
+        {
+            Debug.Log("Got hit by CarrotDude!");
+            TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
+        }
+        
+        //if (collision.CompareTag("Potato"))
+        //{
+            
+        //    Debug.Log("Got hit by Potato!");
+        //    TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
+        //}
+
+
         if (collision.CompareTag("HealthPotion"))
         {
             Destroy(collision.gameObject);
@@ -129,7 +144,12 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("Map");
         }
+
     }
+
+
+
+    
 
     void Heal(float amount)
     {

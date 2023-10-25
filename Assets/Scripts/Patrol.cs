@@ -51,7 +51,7 @@ public class Patrol : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player got hit");
+            Debug.Log("Player got hit by potato!");
             DealDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
         }
     }
