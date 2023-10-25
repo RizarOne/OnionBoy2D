@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
+    private float dashingPower = 50f;
+    private float dashingTime = 0.3f;
     private float dashingCooldown = 1f;
 
 
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
+    bool facingRight = true;
 
     void Start()
     {
@@ -61,20 +63,24 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetAxisRaw("Horizontal")!= 0)
         {
             //Meill‰ on joko a tai d pohjassa
-            transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1,1 ); // X scalen muutos kun liikkuu, p‰‰lle sitten kun on hahmo valmis.
 
-            //animator.SetBool("Walk", true); //sitten kun animaatio valmis ja bool laitettuna animaattoriin.
+
+            float xScale = Mathf.Sign(Input.GetAxisRaw("Horizontal")) * 0.35f;
+            transform.localScale = new Vector3(xScale, 0.35f, 1); // Muuttaa x arvon 0.35 ja -0.35 riippuen kumpaan suuntaan pelaaja kulkee.
+
+
+            animator.SetBool("Walk", true); //sitten kun animaatio valmis ja bool laitettuna animaattoriin.
         }
         else
         {
             //ei liikuta
-            //animator.SetBool("Walk", false);  // Jos walk=false niin idle animaatio toistuu.
+            animator.SetBool("Walk", false);  // Jos walk=false niin idle animaatio toistuu.
         }    
 
         if (Input.GetButtonDown("Jump")&& grounded)
         {
             rb2D.velocity = new Vector2(0, jumpForce);
-            //animator.SetTrigger("Jump"); // Kun hypylle animaatio.
+            animator.SetTrigger("Jump"); // Kun hypylle animaatio.
         }
         if (rb2D.velocity.y < 0)
         {
@@ -88,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
+            animator.SetTrigger("Dash");
         }
 
         hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
@@ -148,8 +155,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-    
+   
 
     void Heal(float amount)
     {
@@ -183,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-
-
+    
 
 }
