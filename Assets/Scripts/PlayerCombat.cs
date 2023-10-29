@@ -17,11 +17,11 @@ public class PlayerCombat : MonoBehaviour
     {
         if(Time.time >= nextAttackTime)
         {
-
           if (Input.GetKeyDown(KeyCode.RightControl))
           {
+            Debug.Log("Attacked!");
             Attack();
-            nextAttackTime = Time.time + 1f / attackRange;
+            nextAttackTime = Time.time + 0.3f / attackRange;
           }
         }
     }
