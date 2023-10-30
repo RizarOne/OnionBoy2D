@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
 
     public float attackRange = 0.5f;
     public int attackDamage = 1;
-    public float attackRate = 2f;
+    public float attackRate = 1f;
     float nextAttackTime = 0;
 
     void Update()
