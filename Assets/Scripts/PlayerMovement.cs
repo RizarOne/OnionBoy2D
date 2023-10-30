@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
-    bool facingRight = true;
-
     void Start()
     {
         animator = GetComponent<Animator>();
