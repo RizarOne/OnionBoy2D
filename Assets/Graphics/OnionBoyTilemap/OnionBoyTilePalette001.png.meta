@@ -295,9 +295,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1280
-        y: 3328
+        y: 3329
         width: 128
-        height: 128
+        height: 127
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,9 +316,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1408
-        y: 3328
+        y: 3329
         width: 128
-        height: 128
+        height: 127
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,9 +337,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 3328
+        y: 3330
         width: 128
-        height: 128
+        height: 126
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -358,9 +358,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1664
-        y: 3328
+        y: 3330
         width: 128
-        height: 128
+        height: 126
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -547,12 +547,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1280
-        y: 3200
+        y: 3197
         width: 128
-        height: 126
+        height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -568,12 +568,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1408
-        y: 3200
+        y: 3197
         width: 128
-        height: 126
+        height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 12, y: 0, z: 0, w: 9}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -589,12 +589,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 3200
+        y: 3197
         width: 128
-        height: 126
+        height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 10}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -610,12 +610,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1664
-        y: 3200
+        y: 3196
         width: 128
-        height: 126
+        height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -631,12 +631,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1792
-        y: 3200
+        y: 3198
         width: 128
-        height: 126
+        height: 127
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 10}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -652,12 +652,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1920
-        y: 3200
+        y: 3197
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 52}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -820,7 +820,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1664
-        y: 3072
+        y: 3073
         width: 128
         height: 128
       alignment: 0
@@ -6975,7 +6975,7 @@ TextureImporter:
         x: 512
         y: 1152
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 73}
@@ -6996,7 +6996,7 @@ TextureImporter:
         x: 640
         y: 1152
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 73}
@@ -7017,7 +7017,7 @@ TextureImporter:
         x: 768
         y: 1152
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 73}
@@ -7038,7 +7038,7 @@ TextureImporter:
         x: 896
         y: 1152
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
