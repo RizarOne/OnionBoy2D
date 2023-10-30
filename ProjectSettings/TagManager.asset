@@ -22,9 +22,9 @@ TagManager:
   - Ground
   - Enemies
   - Player
-  - 
-  - 
-  - 
+  - BackGround
+  - MidGround
+  - ForeGround
   - 
   - 
   - 
