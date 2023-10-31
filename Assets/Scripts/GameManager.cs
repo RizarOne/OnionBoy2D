@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
     public float previousHealth;
     public float maxHealth;
 
+    public string previousLevel;
+
+    public float historyHealth;
+    public float historyPreviousHealth;
+    public float historyMaxHealth;
+
     //Jokaista leveli‰ varten on muuttuja. Muuttujan nimen pit‰‰ olla sama kuin LoadLevel scriptiss‰ olevan levelToLoad muuttujan arvo.
 
     public bool Level_1;
@@ -53,36 +59,38 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))    // KEKSI JOKIN KEINO ETTƒ VAIN MAPISSA SAA MENUN AUKI NIIN SAVE TOIMIII KUNNOLLA
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            SceneManager.LoadScene("MainMenu");
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "Map")
+            {
+
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
-
-    //Kaksi toimintoa, save ja load
-
     public void Save()
     {
         Debug.Log("Game Saved");
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
         PlayerData data = new PlayerData();
-        data.health = health; // Data-objektin health arvo on yht‰ kuin Game Managerin health arvo
+        //Syˆtet‰‰n tallennettava tieto data-objekstiin, joka lopuksi serialisoidaan.
+        data.health = health;
         data.previousHealth = previousHealth;
         data.maxHealth = maxHealth;
+        data.Level1 = Level_1;
+        data.Level2 = Level_2;
+        data.Level3 = Level_3;
         data.currentLevel = currentLevel;
-        data.Level_1 = Level_1; 
-        data.Level_2 = Level_2;
-        data.Level_3 = Level_3;
-        bf.Serialize(file, data);
+        bf.Serialize(file, data); //File ilmoitettu yll‰ ja tallentaa sinne data. alkuiset.
         file.Close();
-      
 
     }
 
     public void Load()
     {
-        //Tsekataan onko tallenettua tiedostoa olemassa. Jos on, niin load tapahtuu.
+        // Tarkastetaan onko olemassa tallennustiedostoa. Jos on niin sitten voidaan ladata tiedot.
         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
             Debug.Log("Game Loaded");
@@ -91,21 +99,21 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            //Siirret‰‰n ladattu info gamemanageriin
+            //siirret‰‰n tiedot playerdatasta meid‰n gameManageriin
 
             health = data.health;
             previousHealth = data.previousHealth;
             maxHealth = data.maxHealth;
+            Level_1 = data.Level1;
+            Level_2 = data.Level2;
+            Level_3 = data.Level3;
             currentLevel = data.currentLevel;
-            Level_1 = data.Level_1;
-            Level_2 = data.Level_2;
-            Level_3 = data.Level_3;
 
         }
     }
 }
 
-// Toinen luokka, joka voidaan serialisoida. Pit‰‰ sis‰ll‰‰n vain sen datan joka serialisoidaan.
+//Toinen luokka, joka voidaan serialisoida. Pit‰‰ sis‰ll‰‰n vain sen datan mit‰ serialisoidaan.
 [Serializable]
 class PlayerData
 {
@@ -113,8 +121,9 @@ class PlayerData
     public float health;
     public float previousHealth;
     public float maxHealth;
-    public bool Level_1;
-    public bool Level_2;
-    public bool Level_3;
+    public bool Level1;
+    public bool Level2;
+    public bool Level3;
+
 
 }

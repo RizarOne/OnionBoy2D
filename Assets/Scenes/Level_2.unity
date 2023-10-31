@@ -98194,7 +98194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525854588259751051, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
       propertyPath: lowJumpMultiplier
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2153615102301615521, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
       propertyPath: m_BackGroundColor.b

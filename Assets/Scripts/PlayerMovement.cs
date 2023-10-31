@@ -37,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>(); 
         trailRenderer = GetComponent<TrailRenderer>();
+
+        GameManager.manager.historyHealth = GameManager.manager.health;
+        GameManager.manager.historyPreviousHealth = GameManager.manager.previousHealth;
+        GameManager.manager.historyMaxHealth = GameManager.manager.maxHealth;
     }
 
     void Update()
@@ -118,8 +122,14 @@ public class PlayerMovement : MonoBehaviour
             TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
         }
               
+        if (collision.gameObject.CompareTag("Potato"))
+        {
+            Debug.Log("Player got hit by potato!");
+            TakeDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
+        }
     }
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
       
@@ -147,7 +157,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.CompareTag("LevelEnd"))
         {
+            GameManager.manager.previousLevel = GameManager.manager.currentLevel;
             SceneManager.LoadScene("Map");
+        }
+
+        if (collision.CompareTag("DeadZone"))
+        {
+            Debug.Log("Out of area!");
+            Die();
         }
 
     }
@@ -165,9 +182,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void TakeDamage(float dmg)
+    public void TakeDamage(float dmg)
     {
+        Debug.Log("TakeDamage function working");
+        GameManager.manager.previousHealth = hearts.fillAmount * GameManager.manager.maxHealth;
         GameManager.manager.health -= dmg;
+
+        if (GameManager.manager.health == 0)
+        {
+
+            Debug.Log("Death!");
+            Die();
+            
+        }
 
     }
 
@@ -187,6 +214,15 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    
+    public void Die()
+    {
+        GameManager.manager.currentLevel = GameManager.manager.previousLevel;
+        GameManager.manager.health = GameManager.manager.historyHealth;
+        GameManager.manager.previousHealth = GameManager.manager.historyPreviousHealth;
+        GameManager.manager.maxHealth = GameManager.manager.historyMaxHealth;
+        SceneManager.LoadScene("Map");
+    }
+
+
 
 }

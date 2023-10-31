@@ -12,6 +12,10 @@ TagManager:
   - EnemyDamager
   - Potato
   - CarrotDude
+  - DeadZone
+  - Boss
+  - WeakSpot
+  - TriggerBoss
   layers:
   - Default
   - TransparentFX

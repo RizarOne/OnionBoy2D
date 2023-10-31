@@ -47,14 +47,14 @@ public class Patrol : MonoBehaviour
         }     
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player got hit by potato!");
-            DealDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log("Player got hit by potato!");
+    //        DealDamage(1); // 3 sydäntä joista 1dmg tiputtaa yhden pois
+    //    }
+    //}
 
     private void flip()
     {
@@ -70,10 +70,10 @@ public class Patrol : MonoBehaviour
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
     }
 
-    void DealDamage(float dmg)
-    {
-        GameManager.manager.health -= dmg;
+    //void DealDamage(float dmg)
+    //{
+    //    GameManager.manager.health -= dmg;
 
-    }
+    //}
 
 }
