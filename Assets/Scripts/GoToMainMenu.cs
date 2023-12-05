@@ -6,7 +6,7 @@ public class GoToMainMenu : MonoBehaviour
 {
     void Start()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Intro");
     }
 
 
