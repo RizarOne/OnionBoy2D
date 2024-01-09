@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
+    public static event Action OnPlayerDeath;
 
+    public float moveSpeed;
     public float jumpForce;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
     public Rigidbody2D rb2D;
-    private TrailRenderer trailRenderer;
+    public TrailRenderer trailRenderer;
 
     public Transform groundCheckPosition;
     public float groundCheckRadius;
@@ -30,11 +32,24 @@ public class PlayerMovement : MonoBehaviour
 
     public Image hearts;
 
+
+    private void OnEnable()
+    {
+        OnPlayerDeath += DisabePlayerMovement; //ajetaan kun event alkaa
+    }
+
+    private void OnDisable()
+    {
+        OnPlayerDeath -= DisabePlayerMovement; // ajetaan kun event p‰‰ttyy
+    }
+
     void Start()
     {
+        EnablePlayerMovement();
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>(); 
-        trailRenderer = GetComponent<TrailRenderer>();
+        //trailRenderer = GetComponent<TrailRenderer>(); Kommentoitu pois ja lis‰tty pelaajaan empty game objectina jotta trailin positiota saa helpommin muutettua.
+
 
         GameManager.manager.historyHealth = GameManager.manager.health;
         GameManager.manager.historyPreviousHealth = GameManager.manager.previousHealth;
@@ -57,7 +72,10 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded=false;
         }
-              
+
+        if (!UIManager.isPaused)
+        {
+
         transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);       
 
         if(Input.GetAxisRaw("Horizontal")!= 0)
@@ -98,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
+
+        }
 
     }
 
@@ -162,7 +182,9 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("DeadZone"))
         {
             Debug.Log("Out of area!");
-            Die();
+            OnPlayerDeath?.Invoke();
+
+            //Die();
         }
 
     }
@@ -190,7 +212,9 @@ public class PlayerMovement : MonoBehaviour
         {
 
             Debug.Log("Death!");
-            Die();
+            OnPlayerDeath?.Invoke();// k‰ynnistet‰‰n event OnPlayerDeath
+
+            //Die(); korvattu eventill‰
             
         }
 
@@ -212,15 +236,28 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    public void Die()
+    //public void Die()
+    //{
+    //    GameManager.manager.currentLevel = GameManager.manager.previousLevel;
+    //    GameManager.manager.health = GameManager.manager.historyHealth;
+    //    GameManager.manager.previousHealth = GameManager.manager.historyPreviousHealth;        Korvattu eventilla "OnPlayerDeath"
+    //    GameManager.manager.maxHealth = GameManager.manager.historyMaxHealth;
+    //    SceneManager.LoadScene("Map");
+    //}
+
+    private void DisabePlayerMovement()
     {
-        GameManager.manager.currentLevel = GameManager.manager.previousLevel;
-        GameManager.manager.health = GameManager.manager.historyHealth;
-        GameManager.manager.previousHealth = GameManager.manager.historyPreviousHealth;
-        GameManager.manager.maxHealth = GameManager.manager.historyMaxHealth;
-        SceneManager.LoadScene("Map");
+        
+        Time.timeScale = 0f; // pys‰ytet‰‰n aika kun kuollaan
+
+
     }
+    private void EnablePlayerMovement()
+    {
+        
 
+        Time.timeScale = 1f; // Palautetaan ajankulku kun restart tai quit nappia painetaan.
 
+    }
 
 }

@@ -15,18 +15,23 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        if(Time.time >= nextAttackTime)
+        if (!UIManager.isPaused)
         {
-          if (Input.GetKeyDown(KeyCode.RightControl))
-          {
-            Debug.Log("Attacked!");
-            Attack();
-            nextAttackTime = Time.time + 0.3f / attackRange;
-          }
-        }
+
+            if (Time.time >= nextAttackTime)
+            {
+                if (Input.GetKeyDown(KeyCode.RightControl))
+                {
+                    Debug.Log("Attacked!");
+                    Attack();
+                    nextAttackTime = Time.time + 0.3f / attackRange;
+                }
+            }
+        }   
+
     }
 
-    void Attack()
+        void Attack()
     {
 
         animator.SetTrigger("Attack");//Play an attack animation
