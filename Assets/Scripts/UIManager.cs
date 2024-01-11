@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,14 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
 
     public static bool isPaused;
+    public static bool isGameOver;
 
 
 
     void Start()
     {
         pauseMenu.SetActive(false);
+         
     }
 
     void Update()
@@ -28,6 +31,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 PauseGame();
+
             }
         }
     }
@@ -35,9 +39,12 @@ public class UIManager : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        if (!isGameOver)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
     }
 
     public void ResumeGame()
@@ -45,20 +52,24 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+
     }
 
     private void OnEnable()
     {
         PlayerMovement.OnPlayerDeath += EnableGameOverMenu;
+
     }
 
     private void OnDisable()
     {
         PlayerMovement.OnPlayerDeath -= EnableGameOverMenu;
+        isGameOver = false;
     }
     public void EnableGameOverMenu()
     {
         gameOverMenu.SetActive (true);
+        isGameOver = true;
     }
 
 
@@ -70,6 +81,8 @@ public class UIManager : MonoBehaviour
         GameManager.manager.maxHealth = GameManager.manager.historyMaxHealth;
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1f;
+        isPaused = false;
+
     }
 
     public void RestartLevel()
