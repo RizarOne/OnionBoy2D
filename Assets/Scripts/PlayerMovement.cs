@@ -99,8 +99,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb2D.velocity = new Vector2(0, jumpForce);
             animator.SetTrigger("Jump"); // Kun hypylle animaatio.
-        }
-        if (rb2D.velocity.y < 0)
+                SoundManager.PlaySound("OBJump");
+
+            }
+            if (rb2D.velocity.y < 0)
         {
             rb2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
@@ -113,9 +115,11 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
             animator.SetTrigger("Dash");
-        }
+                SoundManager.PlaySound("OBDash");
 
-        hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
+            }
+
+            hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
 
         }
 
@@ -204,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        SoundManager.PlaySound("OBHit");
         Debug.Log("TakeDamage function working");
         GameManager.manager.previousHealth = hearts.fillAmount * GameManager.manager.maxHealth;
         GameManager.manager.health -= dmg;
