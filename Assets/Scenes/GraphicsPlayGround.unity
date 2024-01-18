@@ -349,13 +349,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnionBoy
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: ad3cc2036f262d64e910cf7051eea59f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ad3cc2036f262d64e910cf7051eea59f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08928572
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ad3cc2036f262d64e910cf7051eea59f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.469388
+      value: -2.51
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ad3cc2036f262d64e910cf7051eea59f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -574,9 +578,9 @@ GameObject:
   - component: {fileID: 1076049180}
   - component: {fileID: 1076049182}
   - component: {fileID: 1076049181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
