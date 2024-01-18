@@ -8393,18 +8393,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 121028004531106684, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.88
-      objectReference: {fileID: 0}
     - target: {fileID: 525854588259751051, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
       propertyPath: hearts
       value: 
       objectReference: {fileID: 2094971909}
-    - target: {fileID: 3060773943500801475, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: attackRange
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6557074519900560808, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.965982
@@ -8448,22 +8440,6 @@ PrefabInstance:
     - target: {fileID: 6958234132203616773, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
       propertyPath: m_Name
       value: OnionBoy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8474747050216753100, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: m_Size.x
-      value: 1.8047688
-      objectReference: {fileID: 0}
-    - target: {fileID: 8474747050216753100, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: m_Size.y
-      value: 5.2134356
-      objectReference: {fileID: 0}
-    - target: {fileID: 8474747050216753100, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.0713798
-      objectReference: {fileID: 0}
-    - target: {fileID: 8474747050216753100, guid: 634fde509adc5a449a5ff773e6a03489, type: 3}
-      propertyPath: m_Offset.y
-      value: 3.0466173
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14961,9 +14937,9 @@ GameObject:
   - component: {fileID: 1935903178}
   - component: {fileID: 1935903177}
   - component: {fileID: 1935903179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CollidableGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22015,7 +21991,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
