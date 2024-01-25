@@ -23,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.RightControl))
                 {
                     Debug.Log("Attacked!");
+                    SoundManager.PlaySound("OBAttack");
                     Attack();
                     nextAttackTime = Time.time + 0.3f / attackRange;
                 }
