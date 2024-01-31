@@ -13,6 +13,8 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 1f;
     float nextAttackTime = 0;
 
+    public float KBforce;
+
     void Update()
     {
         if (!UIManager.isPaused)
@@ -37,9 +39,11 @@ public class PlayerCombat : MonoBehaviour
 
         animator.SetTrigger("Attack");//Play an attack animation
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); //Detect enemies in range of attack
+
        foreach(Collider2D enemy in hitEnemies)//Damage them
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            bool facingRight = (transform.position.x < enemy.transform.position.x);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage,facingRight, KBforce);
             Debug.Log("We hit" + enemy.name);
         } 
 

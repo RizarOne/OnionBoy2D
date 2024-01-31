@@ -12,8 +12,8 @@ public class SoundManager : MonoBehaviour
         playerHitSound = Resources.Load<AudioClip>("OBAttack");
         dashSound = Resources.Load<AudioClip>("OBDash");
         deathSound = Resources.Load<AudioClip>("OBDeath");
-        enemyDeathSound = Resources.Load<AudioClip>("EMDeath");
-        enemyGotHitSound = Resources.Load<AudioClip>("EMGotHit");
+        enemyDeathSound = Resources.Load<AudioClip>("EnemyDeath");
+        enemyGotHitSound = Resources.Load<AudioClip>("EnemyHurt");
         playerGotHitSound = Resources.Load<AudioClip>("OBHit");
 
         audioSrc = GetComponent<AudioSource>();
@@ -39,6 +39,15 @@ public class SoundManager : MonoBehaviour
                 break;
             case "OBHit":
                 audioSrc.PlayOneShot(playerGotHitSound);
+                break;
+            case "OBDeath":
+                audioSrc.PlayOneShot(deathSound);
+                break;
+            case "EnemyHurt":
+                audioSrc.PlayOneShot(enemyGotHitSound);
+                break;
+            case "EnemyDeath":
+                audioSrc.PlayOneShot(enemyDeathSound);
                 break;
         }
     }

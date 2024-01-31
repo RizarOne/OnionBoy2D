@@ -186,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("DeadZone"))
         {
             Debug.Log("Out of area!");
+            SoundManager.PlaySound("OBDeath");
             OnPlayerDeath?.Invoke();
 
             //Die();
@@ -209,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         SoundManager.PlaySound("OBHit");
+        animator.SetTrigger("Hurt");
         Debug.Log("TakeDamage function working");
         GameManager.manager.previousHealth = hearts.fillAmount * GameManager.manager.maxHealth;
         GameManager.manager.health -= dmg;
@@ -217,6 +219,8 @@ public class PlayerMovement : MonoBehaviour
         {
 
             Debug.Log("Death!");
+            animator.SetTrigger("Death");
+            SoundManager.PlaySound("OBDeath");
             OnPlayerDeath?.Invoke();// k‰ynnistet‰‰n event OnPlayerDeath
 
             //Die(); korvattu eventill‰

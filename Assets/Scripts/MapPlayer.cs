@@ -73,6 +73,7 @@ public class MapPlayer : MonoBehaviour
         {
             rb2D.velocity = new Vector2(0, jumpForce);
             animator.SetTrigger("Jump"); // Kun hypylle animaatio.
+            SoundManager.PlaySound("OBJump");
         }
         if (rb2D.velocity.y < 0)
         {
