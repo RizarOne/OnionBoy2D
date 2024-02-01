@@ -136521,6 +136521,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6857207459410066233, guid: b8132945b434af64c924ad9e3dd24943, type: 3}
+      propertyPath: lowJumpMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7821261219560784379, guid: b8132945b434af64c924ad9e3dd24943, type: 3}
       propertyPath: m_Name
       value: OnionBoyInMap

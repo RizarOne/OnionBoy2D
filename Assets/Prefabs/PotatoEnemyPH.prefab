@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3069706954942603590}
   - component: {fileID: 3662754652122852359}
   - component: {fileID: 6313369572781535177}
-  - component: {fileID: 6204662012072439017}
-  m_Layer: 7
+  - component: {fileID: 995810284237722230}
+  m_Layer: 3
   m_Name: PotatoEnemyPH
   m_TagString: Potato
   m_Icon: {fileID: 0}
@@ -148,9 +148,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006418228, y: 0.03991562}
+  m_Offset: {x: -0.0110120475, y: -0.04707238}
   serializedVersion: 2
-  m_Radius: 0.54487103
+  m_Radius: 0.46247748
 --- !u!95 &3662754652122852359
 Animator:
   serializedVersion: 5
@@ -187,7 +187,7 @@ MonoBehaviour:
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   speed: 4
---- !u!114 &6204662012072439017
+--- !u!114 &995810284237722230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,9 +196,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3317126051363918711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7adaae364396964a8eeb4b56067ecc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 70840096cb76cfb489104eb3f03b3c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3662754652122852359}
-  maxHealth: 3
-  currentHealth: 0

@@ -58,10 +58,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");// Uusi movement kokeilu
+
+
         if (isDashing)
         {
             return;
         }
+
 
         //Groundtest eli ollaanko kosketuksissa maahan
         if (Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer))
@@ -76,14 +80,16 @@ public class PlayerMovement : MonoBehaviour
         if (!UIManager.isPaused)
         {
 
-        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);       
+            //transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);
+            transform.Translate(horizontalInput * moveSpeed * Time.deltaTime, 0, 0);
 
-        if(Input.GetAxisRaw("Horizontal")!= 0)
+
+            if (horizontalInput != 0)//Input.GetAxisRaw("Horizontal")!= 0
         {
             //Meill‰ on joko a tai d pohjassa
 
 
-            float xScale = Mathf.Sign(Input.GetAxisRaw("Horizontal")) * 0.35f;
+            float xScale = Mathf.Sign(Input.GetAxis("Horizontal")) * 0.35f; //GetAxisRaw vanha
             transform.localScale = new Vector3(xScale, 0.35f, 1); // Muuttaa x arvon 0.35 ja -0.35 riippuen kumpaan suuntaan pelaaja kulkee.
 
 
@@ -113,11 +119,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());
+                StopCoroutine("Dash"); // Stop the previous dash coroutine if it's still running.
+                StartCoroutine(Dash());
             animator.SetTrigger("Dash");
-                SoundManager.PlaySound("OBDash");
+            SoundManager.PlaySound("OBDash");
 
-            }
+        }
 
             hearts.fillAmount = GameManager.manager.health/ GameManager.manager.maxHealth;
 
@@ -151,48 +158,79 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+
+
+
+    //    if (collision.CompareTag("EnemyDamager"))
+    //    {
+    //        Debug.Log("Got hit by CarrotDude!");
+    //        TakeDamage(1); // 3 syd‰nt‰ joista 1dmg tiputtaa yhden pois
+    //    }
+
+    //    //if (collision.CompareTag("Potato"))
+    //    //{
+
+    //    //    Debug.Log("Got hit by Potato!");
+    //    //    TakeDamage(1); // 3 syd‰nt‰ joista 1dmg tiputtaa yhden pois
+    //    //}
+
+
+    //    if (collision.CompareTag("HealthPotion"))
+    //    {
+    //        Destroy(collision.gameObject);
+    //        Heal(1);
+    //    }
+
+    //    if (collision.CompareTag("LevelEnd"))
+    //    {
+    //        GameManager.manager.previousLevel = GameManager.manager.currentLevel;
+    //        SceneManager.LoadScene("Map");
+    //    }
+
+    //    if (collision.CompareTag("DeadZone"))
+    //    {
+    //        Debug.Log("Out of area!");
+    //        SoundManager.PlaySound("OBDeath");
+    //        OnPlayerDeath?.Invoke();
+
+    //        //Die();
+    //    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
-
-
-        if (collision.CompareTag("EnemyDamager"))
+        // Switch statement for smarter looking collisions.
+        switch (collision.tag)
         {
-            Debug.Log("Got hit by CarrotDude!");
-            TakeDamage(1); // 3 syd‰nt‰ joista 1dmg tiputtaa yhden pois
+            case "EnemyDamager":
+                Debug.Log("Got hit by CarrotDude!");
+                TakeDamage(1);
+                break;
+
+            case "HealthPotion":
+                Destroy(collision.gameObject);
+                Heal(1);
+                break;
+
+            case "LevelEnd":
+                GameManager.manager.previousLevel = GameManager.manager.currentLevel;
+                SceneManager.LoadScene("Map");
+                break;
+
+            case "DeadZone":
+                Debug.Log("Out of area!");
+                SoundManager.PlaySound("OBDeath");
+                OnPlayerDeath?.Invoke();
+                break;
+
+            default:
+                break;
         }
-        
-        //if (collision.CompareTag("Potato"))
-        //{
-            
-        //    Debug.Log("Got hit by Potato!");
-        //    TakeDamage(1); // 3 syd‰nt‰ joista 1dmg tiputtaa yhden pois
-        //}
-
-
-        if (collision.CompareTag("HealthPotion"))
-        {
-            Destroy(collision.gameObject);
-            Heal(1);
-        }
-
-        if (collision.CompareTag("LevelEnd"))
-        {
-            GameManager.manager.previousLevel = GameManager.manager.currentLevel;
-            SceneManager.LoadScene("Map");
-        }
-
-        if (collision.CompareTag("DeadZone"))
-        {
-            Debug.Log("Out of area!");
-            SoundManager.PlaySound("OBDeath");
-            OnPlayerDeath?.Invoke();
-
-            //Die();
-        }
-
     }
+
+
 
 
    
@@ -224,12 +262,19 @@ public class PlayerMovement : MonoBehaviour
             OnPlayerDeath?.Invoke();// k‰ynnistet‰‰n event OnPlayerDeath
 
             //Die(); korvattu eventill‰
-            
-        }
 
+        }
+    
+    
     }
 
-    private IEnumerator Dash()
+
+
+
+
+
+
+        private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
